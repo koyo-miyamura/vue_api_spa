@@ -22,7 +22,12 @@
         <tbody>
           <tr v-for="article in articles" :key="articles.id">
             <td v-for="key in keys">
-              {{ article[key] }}
+              <span v-if="key === 'title'">
+                <a :href="article.url">{{ article[key] }}</a>
+              </span>
+              <span v-else="key === 'title'">
+                  {{ article[key] }}
+              </span>
             </td>
           </tr>
         </tbody>

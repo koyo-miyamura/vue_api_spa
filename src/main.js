@@ -1,4 +1,4 @@
-var api = 'https://qiita.com/api/v2/items?query=js'
+var api = 'https://qiita.com/api/v2/items?query=elixir'
 var vm = new Vue({
   el: '#app',
   data: function() {
