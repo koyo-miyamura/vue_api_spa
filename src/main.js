@@ -22,13 +22,19 @@ var vm = new Vue({
         }
       })
       return data;
+    },
+    sortByLikesCountDsc (data) {
+      data.sort(function (a, b) {
+        return b.likes_count - a.likes_count
+      })
+      return data;
     }
   },
   mounted () {
     axios
       .get(api)
       .then(response => {
-        this.articles = this.filterUserName(response.data)
+        this.articles = this.filterUserName(this.sortByLikesCountDsc(response.data))
       })
       .catch(error => {
         console.log(error)
