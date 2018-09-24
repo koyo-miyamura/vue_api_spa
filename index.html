@@ -1,0 +1,32 @@
+<div id="app">
+  <h1>Qiita いいね！</h1>
+
+  <section v-if="errored">
+    <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+  </section>
+
+  <section v-else>
+    <div v-if="loading">Loading...</div>
+    <table>
+      <thead>
+        <tr>
+          <th v-for="key in keys">
+            {{ key }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="article in articles" :key="articles.id">
+          <td v-for="key in keys">
+            {{ article[key] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </section>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="src/main.js"></script>
