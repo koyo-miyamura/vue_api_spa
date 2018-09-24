@@ -1,5 +1,7 @@
-<div id="app">
-  <h1>Qiita いいね！</h1>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<div class= "container" id="app">
+  <h1>Vue.js with QiitaAPI</h1>
 
   <section v-if="errored">
     <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
@@ -7,26 +9,30 @@
 
   <section v-else>
     <div v-if="loading">Loading...</div>
-    <table>
-      <thead>
-        <tr>
-          <th v-for="key in keys">
-            {{ key }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="article in articles" :key="articles.id">
-          <td v-for="key in keys">
-            {{ article[key] }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
+    <div class="panel panel-info table-responsive">
+      <div class="panel-heading"><b>Elixir</b>のQiita記事！</div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th v-for="key in keys">
+              {{ key }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="article in articles" :key="articles.id">
+            <td v-for="key in keys">
+              {{ article[key] }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="src/main.js"></script>
