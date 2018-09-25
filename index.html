@@ -3,6 +3,8 @@
 <div class= "container" id="app">
   <h1>Vue.js with QiitaAPI</h1>
 
+  <input v-model.lazy="query" placeholder="edit and Enter!">
+
   <section v-if="errored">
     <p>エラーが発生したよ＞＜</p>
   </section>
@@ -10,7 +12,7 @@
   <section v-else>
     <div v-if="loading">Loading...</div>
     <div class="panel panel-info table-responsive">
-      <div class="panel-heading"><b>Elixir</b>のQiita記事！</div>
+      <div class="panel-heading"><b>{{ query }}</b>のQiita記事！</div>
       <table class="table table-striped">
         <thead>
           <tr>

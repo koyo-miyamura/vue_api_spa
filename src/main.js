@@ -1,4 +1,3 @@
-var api = 'https://qiita.com/api/v2/items?query=elixir'
 var vm = new Vue({
   el: '#app',
   data: function() {
@@ -6,10 +5,29 @@ var vm = new Vue({
       articles: null,
       loading : true,
       errored : false,
-      keys: ['username', 'title', 'created_at', 'likes_count']
+      keys : ['username', 'title', 'created_at', 'likes_count'],
+      query: 'fukuokaex'
+    }
+  },
+  computed: {
+    api : function () {
+      return 'https://qiita.com/api/v2/items?query=' + this.query
     }
   },
   methods: {
+    getApiData() {
+      this.loading = true; // 2回目以降の呼び出し用
+      axios
+      .get(this.api)
+      .then(response => {
+        this.articles = this.filterUserName(this.sortByLikesCountDsc(response.data))
+      })
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
+      .finally(() => this.loading = false)
+    },
     // data.userだけ一回層深い ＆ github_login_name,name,idの3パターンある
     filterUserName (data) {
       data.forEach(function (val, idx, array) {
@@ -30,16 +48,12 @@ var vm = new Vue({
       return data;
     }
   },
+  watch: {
+    query: function() {
+      this.getApiData()
+    }
+  },
   mounted () {
-    axios
-      .get(api)
-      .then(response => {
-        this.articles = this.filterUserName(this.sortByLikesCountDsc(response.data))
-      })
-      .catch(error => {
-        console.log(error)
-        this.errored = true
-      })
-      .finally(() => this.loading = false)
+    this.getApiData()
   }
 })
