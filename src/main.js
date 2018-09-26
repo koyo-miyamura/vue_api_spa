@@ -1,4 +1,37 @@
-var vm = new Vue({
+Vue.component('query-serarch-content', {
+  props: ['keys', 'loading', 'query', 'articles'],
+  template: `
+    <div>
+      <div v-if="loading">Loading...</div>
+      <div class="panel panel-info table-responsive">
+        <div class="panel-heading"><b> {{ query }} </b>のQiita記事！</div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th v-for="key in keys">
+                {{ key }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="article in articles" :key="articles.id">
+              <td v-for="key in keys">
+                <span v-if="key === 'title'">
+                  <a :href="article.url">{{ article[key] }}</a>
+                </span>
+                <span v-else="key === 'title'">
+                    {{ article[key] }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `
+})
+
+new Vue({
   el: '#app',
   data: function() {
     return {
