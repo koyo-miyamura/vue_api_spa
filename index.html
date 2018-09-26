@@ -3,7 +3,8 @@
 <div class= "container" id="app">
   <h1>Vue.js with QiitaAPI</h1>
 
-  <input v-model.lazy="query" placeholder="edit and Enter!">
+  <input v-model.lazy="query" placeholder="検索ワードを入れてね">
+  <input v-model.lazy="items" placeholder="何件表示しますか？">
 
   <section v-if="errored">
     <p>エラーが発生したよ＞＜</p>

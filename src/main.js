@@ -6,12 +6,13 @@ var vm = new Vue({
       loading : true,
       errored : false,
       keys : ['username', 'title', 'created_at', 'likes_count'],
-      query: 'fukuokaex'
+      query: 'fukuokaex',
+      items: 100
     }
   },
   computed: {
     api : function () {
-      return 'https://qiita.com/api/v2/items?query=' + this.query
+      return 'https://qiita.com/api/v2/items?per_page=' + this.items + '&query=' + this.query
     }
   },
   methods: {
@@ -49,7 +50,7 @@ var vm = new Vue({
     }
   },
   watch: {
-    query: function() {
+    api: function() {
       this.getApiData()
     }
   },
