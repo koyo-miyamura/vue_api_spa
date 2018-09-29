@@ -11,16 +11,7 @@
   </head>
   <body>
     <div id="app">
-      <query-search-content 
-      :errored="errored"
-      :keys="keys"
-      :loading="loading"
-      :query="query"
-      @query-input='query = $event'
-      :items="items"
-      @items-input='items = $event'
-      :articles="articles"
-      ></query-search-content>
+      <router-view></router-view>
     </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -29,6 +20,8 @@
     <script src="src/QuerySearchContent.js"></script>
     <script src="src/QuerySearchResult.js"></script>
     <script src="src/ContentTable.js"></script>
+    <script src="src/index.js"></script>
+    <script src="src/home.js"></script>
     <script src="src/main.js"></script>
   </body>
 </html>
