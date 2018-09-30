@@ -1,26 +1,28 @@
 <template>
-  <div class="index">
-    <query-search-content
-      :errored="errored"
-      :keys="keys"
-      :loading="loading"
-      :query="query"
-      @query-input='query = $event'
-      :items="items"
-      @items-input='items = $event'
-      :articles="articles">
-    </query-search-content>
+  <div class="container">
+    <h1>Vue.js with QiitaAPI</h1>
+
+    <input v-model.lazy="query" placeholder="検索ワードを入れてね">
+    <input v-model.lazy="items" placeholder="何件表示しますか？">
+
+    <section v-if="errored">
+      <p>エラーが発生したよ＞＜</p>
+    </section>
+
+    <section v-else>
+      <query-search-result :keys="keys" :loading="loading" :query="query" :articles="articles"></query-search-result>
+    </section>
   </div>
 </template>
 
 <script>
-import QuerySearchContent from '@/components/QuerySearchContent.vue'
+import QuerySearchResult from '@/components/QuerySearchResult.vue'
 import axios from 'axios'
 
 export default {
   name: 'index',
   components: {
-    QuerySearchContent
+    QuerySearchResult
   },
   data: function () {
     return {
