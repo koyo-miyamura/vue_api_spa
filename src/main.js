@@ -1,13 +1,13 @@
-var routes = [
-  { path: '/', component: Index},
-  { path: '/home', component: Home}
-]
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+import './registerServiceWorker'
 
-var router = new VueRouter({
-  routes
-})
+Vue.config.productionTip = false
 
-var vm = new Vue({
-  el: '#app',
-  router
-})
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app')
