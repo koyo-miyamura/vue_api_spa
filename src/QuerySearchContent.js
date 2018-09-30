@@ -2,6 +2,7 @@ Vue.component('query-search-content', {
   props: ['errored', 'keys', 'loading', 'query', 'items', 'articles'],
   template: `
     <div class="container">
+      <router-link to="/home">Go to Home</router-link>
       <h1>Vue.js with QiitaAPI</h1>
 
       <input :value="query" @keyup.enter="$emit('query-input', $event.target.value)" placeholder="検索ワードを入れてね">
