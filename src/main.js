@@ -3,6 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './registerServiceWorker'
+import ElementUI from 'element-ui'
+import './styles.scss'
+import locale from 'element-ui/lib/locale/lang/ja'
+
+Vue.use(ElementUI, locale)
 
 Vue.config.productionTip = false
 

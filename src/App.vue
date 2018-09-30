@@ -1,12 +1,24 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/home">Home</router-link> |
-      <router-link to="/">Query search</router-link>
-    </div>
-    <router-view/>
+    <el-container>
+      <el-header>
+        <the-header/>
+      </el-header>
+      <el-main>
+        <router-view/>
+      </el-main>
+    </el-container>
   </div>
 </template>
+
+<script>
+import TheHeader from '@/components/TheHeader.vue'
+export default {
+  components: {
+    TheHeader
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -15,14 +27,9 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.logo {
+  font-size: 1.5em;
+  color: #303133;
+  font-weight: bold;
 }
 </style>
