@@ -18,7 +18,8 @@
           prop="created_at"
           label="投稿日時"
           width="200"
-          sortable>
+          sortable
+          :formatter="parseDatetime">
         </el-table-column>
         <el-table-column
           prop="likes_count"
@@ -33,7 +34,16 @@
 
 <script>
 export default {
-  props: ['loading', 'query', 'articles']
+  props: ['loading', 'query', 'articles'],
+  methods: {
+    parseDatetime (row, col) {
+      const created = new Date(row.created_at)
+      const y = created.getFullYear()
+      const m = created.getMonth() + 1
+      const d = created.getDate()
+      return `${y}-${m}-${d}`
+    }
+  }
 }
 </script>
 

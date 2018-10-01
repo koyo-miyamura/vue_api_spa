@@ -69,12 +69,6 @@ export default {
         } else {
           array[idx]['username'] = val.user.id
         }
-        // created_atのパース
-        const created = new Date(val.created_at)
-        const y = created.getFullYear()
-        const m = created.getMonth() + 1
-        const d = created.getDate()
-        array[idx]['created_at'] = `${y}-${m}-${d}`
       })
       return data
     },
