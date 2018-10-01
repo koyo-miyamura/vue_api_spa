@@ -16,7 +16,7 @@
     </section>
 
     <section v-else>
-      <query-search-result :keys="keys" :loading="loading" :query="query" :articles="articles"></query-search-result>
+      <query-search-result :loading="loading" :query="query" :articles="articles"></query-search-result>
     </section>
   </div>
 </template>
@@ -35,7 +35,6 @@ export default {
       articles: null,
       loading: true,
       errored: false,
-      keys: ['username', 'title', 'created_at', 'likes_count'],
       query: 'fukuokaex',
       items: 100
     }
