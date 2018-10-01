@@ -1,9 +1,15 @@
 <template>
   <div class="container">
-    <h1>Vue.js with QiitaAPI</h1>
+    <h1><i class="el-icon-search"></i> Keyword search</h1>
 
-    <input v-model.lazy="query" placeholder="検索ワードを入れてね">
-    <input v-model.lazy="items" placeholder="何件表示しますか？">
+    <el-form ref="form" :inline="true" @submit="getApiData">
+      <el-form-item label="キーワード">
+        <el-input :value="query" @change.native="query = $event.target.value" placeholder="検索ワードを入れてね"></el-input>
+      </el-form-item>
+      <el-form-item label="表示数">
+        <el-input :value="items" @change.native="items = $event.target.value" placeholder="何件表示しますか？"></el-input>
+      </el-form-item>
+    </el-form>
 
     <section v-if="errored">
       <p>エラーが発生したよ＞＜</p>
