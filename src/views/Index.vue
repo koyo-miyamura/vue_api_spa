@@ -16,7 +16,7 @@
     </section>
 
     <section v-else>
-      <query-search-result :loading="loading" :query="query" :articles="articles"></query-search-result>
+      <query-search-result :loading="loading" :articles="articles"></query-search-result>
     </section>
   </div>
 </template>
