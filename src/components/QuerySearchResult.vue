@@ -5,7 +5,9 @@
         <el-table-column
           prop="username"
           label="ユーザ名"
-          width="150">
+          width="150"
+          :filters="filterdUser"
+          :filter-method="filterUsername">
         </el-table-column>
         <el-table-column label="タイトル">
           <template scope="scope">
@@ -32,6 +34,7 @@
 
 <script>
 export default {
+  name: 'query-search-result',
   props: {
     loading: {
       type: Boolean
@@ -47,6 +50,25 @@ export default {
       const m = created.getMonth() + 1
       const d = created.getDate()
       return `${y}-${m}-${d}`
+    },
+    filterUsername (value, row) {
+      return row.username === value
+    },
+    filterUserList (array) {
+      let filters = []
+      let pushedUser = []
+      array.forEach(function (val) {
+        if (!pushedUser.includes(val.username)) {
+          pushedUser.push(val.username)
+          filters.push({ 'text': val.username, 'value': val.username })
+        }
+      })
+      return filters
+    }
+  },
+  computed: {
+    filterdUser: function () {
+      return this.filterUserList(this.articles)
     }
   }
 }

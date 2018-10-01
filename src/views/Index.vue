@@ -32,7 +32,7 @@ export default {
   },
   data: function () {
     return {
-      articles: null,
+      articles: [],
       loading: true,
       errored: false,
       query: 'fukuokaex',

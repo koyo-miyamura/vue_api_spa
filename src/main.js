@@ -5,9 +5,9 @@ import store from './store'
 import './registerServiceWorker'
 import ElementUI from 'element-ui'
 import './styles.scss'
-import locale from 'element-ui/lib/locale/lang/ja'
+import locale from 'element-ui/lib/locale/lang/en'
 
-Vue.use(ElementUI, locale)
+Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
 
