@@ -10,7 +10,7 @@
           :filter-method="filterUsername">
         </el-table-column>
         <el-table-column label="タイトル">
-          <template scope="scope">
+          <template slot-scope="scope">
             <a class="table-title-link" :href="scope.row.url" target="_blank">{{ scope.row.title }}</a>
           </template>
         </el-table-column>
