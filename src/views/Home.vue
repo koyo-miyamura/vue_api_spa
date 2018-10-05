@@ -1,6 +1,7 @@
 <template>
   <div class="jumbotron">
     <h1>Qiita Search</h1>
+    <p><b>最新100件</b>の投稿をQiita APIから検索するSPA (古い投稿は表示しません)</p>
     <p>by Koyo
       &nbsp;<a href="https://github.com/koyo-miyamura"><font-awesome-icon :icon="[ 'fab', 'github' ]" /></a>
       &nbsp;<a href="https://twitter.com/koyomiyamura"><font-awesome-icon :icon="[ 'fab', 'twitter' ]" /></a>
