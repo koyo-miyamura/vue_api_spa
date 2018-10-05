@@ -7,13 +7,17 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
-      component: () => import('./views/Index.vue')
+      name: 'home',
+      component: () => import('./views/Home.vue')
     },
     {
       path: '/home',
-      name: 'home',
-      component: () => import('./views/Home.vue')
+      redirect: '/'
+    },
+    {
+      path: '/search/query',
+      name: 'query-search',
+      component: () => import('./views/QuerySearch.vue')
     }
   ]
 })

@@ -28,7 +28,7 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${process.env.VUE_APP_Q
 axios.defaults.headers.common['Content-Type'] = `application/json`
 
 export default {
-  name: 'index',
+  name: 'query-search',
   components: {
     QuerySearchResult
   },
