@@ -1,49 +1,53 @@
 <template>
   <div class="container">
-    <h1><i class="el-icon-search"></i> Keyword search</h1>
+    <h1><i class="el-icon-search"></i> Tag search</h1>
 
     <el-form :model="searchForm" ref="searchForm" :inline="true">
-      <el-form-item label="キーワード" prop="query" :rules="rules.query">
-        <el-input type='query' v-model="searchForm.query" @change.native="submitSearchForm('searchForm')" placeholder="検索ワードを入れてね"></el-input>
+      <el-form-item label="タグ" prop="tag" :rules="rules.tag">
+        <el-input type='tag' v-model="searchForm.tag" @change.native="submitSearchForm('searchForm')" placeholder="タグ名を入れてね"></el-input>
       </el-form-item>
       <el-form-item label="表示数" prop="items" :rules="rules.items">
         <el-input type='items' v-model.number="searchForm.items" @change.native="submitSearchForm('searchForm')" placeholder="何件表示しますか？"></el-input>
       </el-form-item>
     </el-form>
 
-    <section v-if="errored">
+    <section v-if="notFound">
+      <p>そのタグは存在しないよ＞＜</p>
+    </section>
+    <section v-else-if="errored">
       <p>エラーが発生したよ＞＜</p>
     </section>
 
     <section v-else>
-      <query-search-result :loading="loading" :articles="articles"></query-search-result>
+      <search-result :loading="loading" :articles="articles"></search-result>
     </section>
   </div>
 </template>
 
 <script>
-import QuerySearchResult from '@/components/QuerySearchResult.vue'
+import SearchResult from '@/components/SearchResult.vue'
 import axios from 'axios'
 axios.defaults.headers.common['Authorization'] = `Bearer ${process.env.VUE_APP_QIITA_API_KEY}`
 axios.defaults.headers.common['Content-Type'] = `application/json`
 
 export default {
-  name: 'index',
+  name: 'tag-search',
   components: {
-    QuerySearchResult
+    SearchResult
   },
   data: function () {
     return {
       articles: [],
       loading: true,
       errored: false,
+      notFound: false,
       searchForm: {
-        query: 'fukuokaex',
+        tag: 'elixir',
         items: 100
       },
       rules: {
-        query: [
-          { type: 'string', message: '文字を入力してね' }
+        tag: [
+          { type: 'string', message: 'タグ名を入力してね' }
         ],
         items: [
           { required: true, message: '何か入力してね' },
@@ -54,18 +58,25 @@ export default {
   },
   computed: {
     api: function () {
-      return 'https://qiita.com/api/v2/items?per_page=' + this.searchForm.items + '&query=' + this.searchForm.query
+      return 'https://qiita.com/api/v2/tags/' + this.searchForm.tag + '/items' + '?per_page=' + this.searchForm.items
     }
   },
   methods: {
     getApiData () {
-      this.loading = true // 2回目以降の呼び出し用
+      // 2回目以降の呼び出し用
+      this.loading = true
+      this.errored = false
+      this.notFound = false
       axios
         .get(this.api)
         .then(response => {
           this.articles = this.filterUserName(this.sortByLikesCountDsc(response.data))
         })
         .catch(error => {
+          // tag検索の場合は見つからない場合notFoundを返す
+          if (error.response.status === 404) {
+            this.notFound = true
+          }
           console.log(error)
           this.errored = true
         })

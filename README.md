@@ -1,4 +1,5 @@
-# qiita_api_spa
+# Qiita Search
+**最新100件**の投稿をQiita APIから検索するSPA(古い投稿は表示しません＞＜)
 
 ## Project setup
 ```
