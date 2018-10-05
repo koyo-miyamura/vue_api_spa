@@ -73,6 +73,7 @@ export default {
           this.articles = this.filterUserName(this.sortByLikesCountDsc(response.data))
         })
         .catch(error => {
+          // tag検索の場合は見つからない場合notFoundを返す
           if (error.response.status === 404) {
             this.notFound = true
           }
