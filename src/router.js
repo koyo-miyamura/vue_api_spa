@@ -18,6 +18,11 @@ export default new Router({
       path: '/search/query',
       name: 'query-search',
       component: () => import('./views/QuerySearch.vue')
+    },
+    {
+      path: '/search/tag',
+      name: 'tag-search',
+      component: () => import('./views/TagSearch.vue')
     }
   ]
 })
