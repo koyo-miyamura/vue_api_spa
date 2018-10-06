@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="panel panel-info table-responsive">
+    <div v-if="showChart && !loading">
+      <search-result-chart :chartData="articles"></search-result-chart>
+    </div>
+    <div>
       <el-table :data="articles" v-loading="loading">
         <el-table-column
           prop="username"
@@ -33,14 +36,22 @@
 </template>
 
 <script>
+import SearchResultChart from '@/components/SearchResultChart.vue'
+
 export default {
-  name: 'query-search-result',
+  name: 'search-result',
+  components: {
+    SearchResultChart
+  },
   props: {
     loading: {
       type: Boolean
     },
     articles: {
       type: Array
+    },
+    showChart: {
+      type: Boolean
     }
   },
   methods: {

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1><i class="el-icon-search"></i> Tag search</h1>
+    <h1  class="search-title"><i class="el-icon-search"></i> Tag search</h1>
 
     <el-form :model="searchForm" ref="searchForm" :inline="true">
       <el-form-item label="タグ" prop="tag" :rules="rules.tag">
@@ -8,6 +8,9 @@
       </el-form-item>
       <el-form-item label="表示数" prop="items" :rules="rules.items">
         <el-input type='items' v-model.number="searchForm.items" @change.native="submitSearchForm('searchForm')" placeholder="何件表示しますか？"></el-input>
+      </el-form-item>
+      <el-form-item label="チャート">
+        <el-switch v-model="searchForm.showChart"></el-switch>
       </el-form-item>
     </el-form>
 
@@ -19,7 +22,7 @@
     </section>
 
     <section v-else>
-      <search-result :loading="loading" :articles="articles"></search-result>
+      <search-result :loading="loading" :articles="articles" :showChart="searchForm.showChart"></search-result>
     </section>
   </div>
 </template>
@@ -43,7 +46,8 @@ export default {
       notFound: false,
       searchForm: {
         tag: 'elixir',
-        items: 100
+        items: 100,
+        showChart: true
       },
       rules: {
         tag: [
@@ -116,3 +120,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.search-title {
+  color: teal;
+}
+@media (max-width: 480px ) {
+  /* ElementUIはscopedスタイルの場合 >>> 必須 */
+  .el-form-item >>> .el-form-item__label {
+    width: 100px
+  }
+}
+</style>
