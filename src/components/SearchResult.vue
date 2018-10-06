@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div v-if="showChart">
       <search-result-chart :chartData="articles"></search-result-chart>
     </div>
     <div>
@@ -49,6 +49,9 @@ export default {
     },
     articles: {
       type: Array
+    },
+    showChart: {
+      type: Boolean
     }
   },
   methods: {
