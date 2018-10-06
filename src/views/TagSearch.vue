@@ -121,4 +121,10 @@ export default {
 .search-title {
   color: teal;
 }
+@media (max-width: 480px ) {
+  /* ElementUIはscopedスタイルの場合 >>> 必須 */
+  .el-form-item >>> .el-form-item__label {
+    width: 100px
+  }
+}
 </style>
