@@ -1,7 +1,9 @@
 <template>
   <div>
-    <div v-if="showChart && !loading">
+    <div v-if="showUserRanking && !loading">
       <search-result-user-ranking :chartData="articles"></search-result-user-ranking>
+    </div>
+    <div v-if="showTitleRanking && !loading">
       <search-result-title-ranking :chartData="articles"></search-result-title-ranking>
     </div>
     <div>
@@ -81,8 +83,11 @@ export default {
     filterdUser: function () {
       return this.filterUserList(this.articles)
     },
-    showChart () {
-      return this.$store.state.showChart
+    showUserRanking () {
+      return this.$store.state.showUserRanking
+    },
+    showTitleRanking () {
+      return this.$store.state.showTitleRanking
     }
   }
 }

@@ -13,12 +13,10 @@ export default new Vuex.Store({
       tag: 'elixir',
       items: 100
     },
-    showChart: true
+    showTitleRanking: false,
+    showUserRanking: true
   },
   mutations: {
-    setShowChart (state, value) {
-      state.showChart = value
-    },
     setQuery (state, value) {
       state.querySearch.query = value
     },
@@ -30,6 +28,12 @@ export default new Vuex.Store({
     },
     setTagItems (state, value) {
       state.tagSearch.items = value
+    },
+    setShowTitleRanking (state, value) {
+      state.showTitleRanking = value
+    },
+    setShowUserRanking (state, value) {
+      state.showUserRanking = value
     }
   },
   actions: {
