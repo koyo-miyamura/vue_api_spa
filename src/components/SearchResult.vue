@@ -49,9 +49,6 @@ export default {
     },
     articles: {
       type: Array
-    },
-    showChart: {
-      type: Boolean
     }
   },
   methods: {
@@ -80,6 +77,9 @@ export default {
   computed: {
     filterdUser: function () {
       return this.filterUserList(this.articles)
+    },
+    showChart () {
+      return this.$store.state.showChart
     }
   }
 }
