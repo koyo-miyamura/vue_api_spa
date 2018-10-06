@@ -1,7 +1,8 @@
 <template>
   <div>
     <div v-if="showChart && !loading">
-      <search-result-chart :chartData="articles"></search-result-chart>
+      <search-result-user-ranking :chartData="articles"></search-result-user-ranking>
+      <search-result-title-ranking :chartData="articles"></search-result-title-ranking>
     </div>
     <div>
       <el-table :data="articles" v-loading="loading">
@@ -36,12 +37,14 @@
 </template>
 
 <script>
-import SearchResultChart from '@/components/SearchResultChart.vue'
+import SearchResultTitleRanking from '@/components/SearchResultTitleRanking.vue'
+import SearchResultUserRanking from '@/components/SearchResultUserRanking.vue'
 
 export default {
   name: 'search-result',
   components: {
-    SearchResultChart
+    SearchResultTitleRanking,
+    SearchResultUserRanking
   },
   props: {
     loading: {

@@ -1,7 +1,7 @@
 <script>
 import { HorizontalBar } from 'vue-chartjs'
 export default {
-  name: 'search-result-chart',
+  name: 'search-result-user-ranking',
   props: {
     chartData: {
       type: Array

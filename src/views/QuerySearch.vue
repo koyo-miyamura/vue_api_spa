@@ -9,7 +9,7 @@
       <el-form-item label="表示数" prop="items" :rules="rules.items">
         <el-input type='items' v-model.number="searchForm.items" @change.native="submitSearchForm('searchForm')" placeholder="何件表示しますか？"></el-input>
       </el-form-item>
-      <el-form-item label="チャート">
+      <el-form-item label="記事ランク">
         <el-switch v-model="showChart"></el-switch>
       </el-form-item>
     </el-form>
