@@ -41,8 +41,8 @@ export default {
       loading: true,
       errored: false,
       searchForm: {
-        query: 'fukuokaex',
-        items: 100
+        query: '',
+        items: 0
       },
       rules: {
         query: [
@@ -88,6 +88,8 @@ export default {
       // validateのコールバック関数はthisを束縛する必要があるためアロー関数にする
       this.$refs[formRef].validate((valid) => {
         if (valid) {
+          this.$store.commit('setQuery', this.searchForm.query)
+          this.$store.commit('setQueryItems', this.searchForm.items)
           this.getApiData()
         }
       })
@@ -114,6 +116,8 @@ export default {
     }
   },
   mounted () {
+    this.searchForm.query = this.$store.state.querySearch.query
+    this.searchForm.items = this.$store.state.querySearch.items
     this.getApiData()
   }
 }
