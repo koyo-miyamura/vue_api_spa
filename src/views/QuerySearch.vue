@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1><i class="el-icon-search"></i> Keyword search</h1>
+    <h1 class="search-title"><i class="el-icon-search"></i> Keyword search</h1>
 
     <el-form :model="searchForm" ref="searchForm" :inline="true">
       <el-form-item label="キーワード" prop="query" :rules="rules.query">
@@ -107,3 +107,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.search-title {
+  color: teal;
+}
+</style>

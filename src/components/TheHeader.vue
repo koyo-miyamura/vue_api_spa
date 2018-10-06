@@ -19,7 +19,7 @@ export default {
 <style scoped>
 .logo {
   font-size: 1.5em;
-  color: #303133;
+  color: teal;
   font-weight: bold;
 }
 @media (max-width: 480px) {
