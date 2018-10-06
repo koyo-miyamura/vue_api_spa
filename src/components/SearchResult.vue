@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="showChart">
+    <div v-if="showChart && !loading">
       <search-result-chart :chartData="articles"></search-result-chart>
     </div>
     <div>
