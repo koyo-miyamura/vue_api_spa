@@ -10,7 +10,7 @@
         <el-input type='items' v-model.number="searchForm.items" @change.native="submitSearchForm('searchForm')" placeholder="何件表示しますか？"></el-input>
       </el-form-item>
       <el-form-item label="チャート">
-        <el-switch v-model="searchForm.showChart"></el-switch>
+        <el-switch v-model="showChart"></el-switch>
       </el-form-item>
     </el-form>
 
@@ -19,7 +19,7 @@
     </section>
 
     <section v-else>
-      <search-result :loading="loading" :articles="articles" :showChart="searchForm.showChart"></search-result>
+      <search-result :loading="loading" :articles="articles"></search-result>
     </section>
   </div>
 </template>
@@ -41,9 +41,8 @@ export default {
       loading: true,
       errored: false,
       searchForm: {
-        query: 'fukuokaex',
-        items: 100,
-        showChart: true
+        query: '',
+        items: 0
       },
       rules: {
         query: [
@@ -59,6 +58,14 @@ export default {
   computed: {
     api: function () {
       return 'https://qiita.com/api/v2/items?per_page=' + this.searchForm.items + '&query=' + this.searchForm.query
+    },
+    showChart: {
+      get () {
+        return this.$store.state.showChart
+      },
+      set (value) {
+        return this.$store.commit('setShowChart', value)
+      }
     }
   },
   methods: {
@@ -81,6 +88,8 @@ export default {
       // validateのコールバック関数はthisを束縛する必要があるためアロー関数にする
       this.$refs[formRef].validate((valid) => {
         if (valid) {
+          this.$store.commit('setQuery', this.searchForm.query)
+          this.$store.commit('setQueryItems', this.searchForm.items)
           this.getApiData()
         }
       })
@@ -107,6 +116,8 @@ export default {
     }
   },
   mounted () {
+    this.searchForm.query = this.$store.state.querySearch.query
+    this.searchForm.items = this.$store.state.querySearch.items
     this.getApiData()
   }
 }

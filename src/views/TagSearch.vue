@@ -10,7 +10,7 @@
         <el-input type='items' v-model.number="searchForm.items" @change.native="submitSearchForm('searchForm')" placeholder="何件表示しますか？"></el-input>
       </el-form-item>
       <el-form-item label="チャート">
-        <el-switch v-model="searchForm.showChart"></el-switch>
+        <el-switch v-model="showChart"></el-switch>
       </el-form-item>
     </el-form>
 
@@ -20,9 +20,8 @@
     <section v-else-if="errored">
       <p>エラーが発生したよ＞＜</p>
     </section>
-
     <section v-else>
-      <search-result :loading="loading" :articles="articles" :showChart="searchForm.showChart"></search-result>
+      <search-result :loading="loading" :articles="articles"></search-result>
     </section>
   </div>
 </template>
@@ -45,13 +44,13 @@ export default {
       errored: false,
       notFound: false,
       searchForm: {
-        tag: 'elixir',
-        items: 100,
-        showChart: true
+        tag: '',
+        items: 0
       },
       rules: {
         tag: [
-          { type: 'string', message: 'タグ名を入力してね' }
+          { required: true, message: '何か入力してね' },
+          { type: 'string', message: '文字を入力してね' }
         ],
         items: [
           { required: true, message: '何か入力してね' },
@@ -63,6 +62,14 @@ export default {
   computed: {
     api: function () {
       return 'https://qiita.com/api/v2/tags/' + this.searchForm.tag + '/items' + '?per_page=' + this.searchForm.items
+    },
+    showChart: {
+      get () {
+        return this.$store.state.showChart
+      },
+      set (value) {
+        return this.$store.commit('setShowChart', value)
+      }
     }
   },
   methods: {
@@ -90,6 +97,8 @@ export default {
       // validateのコールバック関数はthisを束縛する必要があるためアロー関数にする
       this.$refs[formRef].validate((valid) => {
         if (valid) {
+          this.$store.commit('setTag', this.searchForm.tag)
+          this.$store.commit('setTagItems', this.searchForm.items)
           this.getApiData()
         }
       })
@@ -116,6 +125,8 @@ export default {
     }
   },
   mounted () {
+    this.searchForm.tag = this.$store.state.tagSearch.tag
+    this.searchForm.items = this.$store.state.tagSearch.items
     this.getApiData()
   }
 }
