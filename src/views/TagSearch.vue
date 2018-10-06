@@ -2,7 +2,7 @@
   <div class="container">
     <h1  class="search-title"><i class="el-icon-search"></i> Tag search</h1>
 
-    <el-form :model="searchForm" ref="searchForm" :inline="true">
+    <el-form :model="searchForm" ref="searchForm" :inline="true" class="search-form">
       <el-form-item label="タグ" prop="tag" :rules="rules.tag">
         <el-input type='tag' v-model="searchForm.tag" @change.native="submitSearchForm('searchForm')" placeholder="タグ名を入れてね"></el-input>
       </el-form-item>
@@ -10,11 +10,11 @@
         <el-input type='items' v-model.number="searchForm.items" @change.native="submitSearchForm('searchForm')" placeholder="何件表示しますか？"></el-input>
       </el-form-item>
     </el-form>
-    <el-form ref="chartSwitch" :inline="true">
-      <el-form-item class="switch-label" label="ユーザランキング">
+    <el-form class="switch-label" ref="chartSwitch" :inline="true">
+      <el-form-item label="ユーザランキング">
         <el-switch v-model="showUserRanking"></el-switch>
       </el-form-item>
-      <el-form-item class="switch-label" label="記事ランキング">
+      <el-form-item label="記事ランキング">
         <el-switch v-model="showTitleRanking"></el-switch>
       </el-form-item>
     </el-form>
@@ -151,10 +151,15 @@ export default {
 }
 @media (max-width: 480px ) {
   /* ElementUIはscopedスタイルの場合 >>> 必須 */
-  .el-form-item >>> .el-form-item__label {
-    width: 100px;
+  .search-form >>> .el-form-item__label {
+    width: 90px;
+    font-size: 12px;
+  }
+  .search-form >>> .el-input__inner {
+    width: 160px;
   }
   .switch-label >>> .el-form-item__label {
+    width: 100px;
     font-size: 11px;
   }
 }

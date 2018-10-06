@@ -26,5 +26,8 @@ export default {
   .xs-not-show {
     display: none
   }
+  .logo {
+    font-size: 1.3em;
+  }
 }
 </style>
