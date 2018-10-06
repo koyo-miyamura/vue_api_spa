@@ -2,15 +2,20 @@
   <div class="container">
     <h1 class="search-title"><i class="el-icon-search"></i> Keyword search</h1>
 
-    <el-form :model="searchForm" ref="searchForm" :inline="true">
+    <el-form :model="searchForm" ref="searchForm" :inline="true" class="search-form">
       <el-form-item label="キーワード" prop="query" :rules="rules.query">
         <el-input type='query' v-model="searchForm.query" @change.native="submitSearchForm('searchForm')" placeholder="検索ワードを入れてね"></el-input>
       </el-form-item>
       <el-form-item label="表示数" prop="items" :rules="rules.items">
         <el-input type='items' v-model.number="searchForm.items" @change.native="submitSearchForm('searchForm')" placeholder="何件表示しますか？"></el-input>
       </el-form-item>
-      <el-form-item label="チャート">
-        <el-switch v-model="showChart"></el-switch>
+    </el-form>
+    <el-form class="switch-label" ref="chartSwitch" :inline="true">
+      <el-form-item label="ユーザランキング">
+        <el-switch v-model="showUserRanking"></el-switch>
+      </el-form-item>
+      <el-form-item label="記事ランキング">
+        <el-switch v-model="showTitleRanking"></el-switch>
       </el-form-item>
     </el-form>
 
@@ -59,12 +64,20 @@ export default {
     api: function () {
       return 'https://qiita.com/api/v2/items?per_page=' + this.searchForm.items + '&query=' + this.searchForm.query
     },
-    showChart: {
+    showUserRanking: {
       get () {
-        return this.$store.state.showChart
+        return this.$store.state.showUserRanking
       },
       set (value) {
-        return this.$store.commit('setShowChart', value)
+        return this.$store.commit('setShowUserRanking', value)
+      }
+    },
+    showTitleRanking: {
+      get () {
+        return this.$store.state.showTitleRanking
+      },
+      set (value) {
+        return this.$store.commit('setShowTitleRanking', value)
       }
     }
   },
@@ -129,8 +142,16 @@ export default {
 }
 @media (max-width: 480px) {
   /* ElementUIはscopedスタイルの場合 >>> 必須 */
-  .el-form-item >>> .el-form-item__label {
-    width: 100px
+  .search-form >>> .el-form-item__label {
+    width: 90px;
+    font-size: 12px;
+  }
+  .search-form >>> .el-input__inner {
+    width: 160px;
+  }
+  .switch-label >>> .el-form-item__label {
+    width: 100px;
+    font-size: 11px;
   }
 }
 </style>

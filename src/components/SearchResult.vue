@@ -1,7 +1,10 @@
 <template>
   <div>
-    <div v-if="showChart && !loading">
-      <search-result-chart :chartData="articles"></search-result-chart>
+    <div v-if="showUserRanking && !loading">
+      <search-result-user-ranking :chartData="articles"></search-result-user-ranking>
+    </div>
+    <div v-if="showTitleRanking && !loading">
+      <search-result-title-ranking :chartData="articles"></search-result-title-ranking>
     </div>
     <div>
       <el-table :data="articles" v-loading="loading">
@@ -36,12 +39,14 @@
 </template>
 
 <script>
-import SearchResultChart from '@/components/SearchResultChart.vue'
+import SearchResultTitleRanking from '@/components/SearchResultTitleRanking.vue'
+import SearchResultUserRanking from '@/components/SearchResultUserRanking.vue'
 
 export default {
   name: 'search-result',
   components: {
-    SearchResultChart
+    SearchResultTitleRanking,
+    SearchResultUserRanking
   },
   props: {
     loading: {
@@ -78,8 +83,11 @@ export default {
     filterdUser: function () {
       return this.filterUserList(this.articles)
     },
-    showChart () {
-      return this.$store.state.showChart
+    showUserRanking () {
+      return this.$store.state.showUserRanking
+    },
+    showTitleRanking () {
+      return this.$store.state.showTitleRanking
     }
   }
 }
